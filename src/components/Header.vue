@@ -6,7 +6,7 @@
       class="max-w-[1200px] mx-auto px-4 lg:px-6 flex items-center justify-between h-16"
     >
       <!-- Logo -->
-      <div @click="goHome" class="flex items-center gap-3 cursor-pointer btn-flash bg-transparent border-0 shadow-none">
+      <div @click="goHome" class="flex items-center gap-3 cursor-pointer btn-flash" style="background-color: transparent; box-shadow: none; border: none;">
         <img src="/logo.png" alt="Logo" class="h-6 w-auto object-contain" />
       </div>
 

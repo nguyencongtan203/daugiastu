@@ -1,44 +1,60 @@
-/* Tailwind @layer components */
-@import "tailwindcss";
+.btn-flash {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  background-color: #0f6bae;
+  transition: color 0.2s, background-color 0.2s;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  isolation: isolate;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 
-@layer components {
-  .btn-flash {
-    @apply relative inline-flex items-center justify-center overflow-hidden rounded-xl font-bold text-white shadow-sm bg-[#0f6bae] hover:bg-[#1385d8] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 px-3 py-2 text-base;
-    isolation: isolate;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
+.btn-flash:hover {
+  background-color: #1385d8;
+}
 
-  .btn-flash span {
-    position: relative;
-    z-index: 10;
-  }
+.btn-flash:focus-visible {
+  box-shadow: 0 0 0 2px #0ea5e9, 0 0 0 2px white;
+}
 
-  /* Vệt sáng */
-  .btn-flash::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -80%;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(255, 255, 255, 0) 100%);
-    transform: skewX(-20deg);
-    opacity: 0;
-    pointer-events: none;
-    filter: blur(10px);
-    mix-blend-mode: screen;
-    z-index: 0;
-  }
+.btn-flash span {
+  position: relative;
+  z-index: 10;
+}
 
-  /* Hover hiệu ứng */
-  .btn-flash:hover::before,
-  .btn-flash:focus-visible::before,
-  .btn-flash:active::before {
-    animation: btn-shine 0.2s linear forwards;
-  }
+/* Vệt sáng */
+.btn-flash::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+
+/* Hover hiệu ứng */
+.btn-flash:hover::before,
+.btn-flash:focus-visible::before,
+.btn-flash:active::before {
+  animation: btn-shine 0.2s linear forwards;
 }
 
 /* Keyframes */
@@ -163,8 +179,10 @@
 }
 
 .tab-btn--active {
-  @apply bg-sky-100 text-sky-700;
+  background-color: #dbeafe;
+  color: #0c4a6e;
 }
+
 .tab-btn.active:before,
 .tab-btn.active:after,
 .sub-tab-btn.active:before,
