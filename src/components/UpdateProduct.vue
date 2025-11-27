@@ -95,7 +95,7 @@
             >
               <img
                 v-if="img.preview || img.tenanh"
-                :src="img.preview || getImageUrl(img.tenanh)"
+                :src="img.preview || buildImageUrl(img.tenanh)"
                 class="object-cover w-full h-full rounded-md"
                 alt=""
               />
@@ -283,7 +283,12 @@ function clearErrors() {
   Object.keys(errors).forEach((k) => delete errors[k]);
 }
 
-const getImageUrl = (tenanh) => `${API}/imgs/${tenanh}`;
+/* Supabase image builder */
+const SUPABASE_URL = 'https://gcxlqxkowwkdhyiyjaks.supabase.co' // Thay bằng URL project thật nếu khác
+function buildImageUrl(key) {
+  if (!key) return '/placeholder.png'
+  return SUPABASE_URL.replace(/\/+$/, '') + '/storage/v1/object/public/' + key
+}
 
 function extractErrorMessage(err) {
   if (err?.response?.data?.message) return err.response.data.message;
