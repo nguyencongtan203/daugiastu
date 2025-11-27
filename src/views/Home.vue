@@ -516,7 +516,7 @@ async function fetchAuctions() {
 
     if (res.data?.code === 200 && res.data.result) {
       const pg = res.data.result;
-      totalPages.value = pg.totalPages || 1;
+      totalPages.value = pg.page?.totalPages || 1;
 
       pageContent.value = (pg.content || []).map((it) => {
         const imgSrc = it.sanPham?.hinhAnh?.[0]?.tenanh

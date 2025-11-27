@@ -373,6 +373,7 @@ const handleAuctionCreated = async () => {
 async function fetchProducts() {
   try {
     const token = Cookies.get("jwt_token");
+    console.log("Token:", token);
     if (!token) return;
     const res = await axios.get(`${API}/products/find-by-user`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -385,7 +386,7 @@ async function fetchProducts() {
     if (res.data?.code === 200 && res.data.result) {
       const pg = res.data.result;
       products.value = pg.content || [];
-      productTotalPages.value = pg.totalPages || 1;
+      productTotalPages.value = pg.page?.totalPages || 1;
     } else {
       products.value = [];
       productTotalPages.value = 1;

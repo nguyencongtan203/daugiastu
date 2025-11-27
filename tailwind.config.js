@@ -11,5 +11,12 @@ export default {
       },
     },
   },
+  safelist: [
+    "btn-flash",
+    "tab-btn",
+    "tab-btn--active",
+    "sub-tab-btn",
+    "sub-tab-btn--active",
+  ],
   plugins: [],
 }
