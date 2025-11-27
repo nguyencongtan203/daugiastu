@@ -271,7 +271,7 @@ import Cookies from "js-cookie";
 
 defineOptions({ name: "DepositPayments" });
 
-const API = "http://localhost:8082/api";
+const API = "https://daugiabe-production.up.railway.app/api";
 const deposits = ref([]);
 const wins = ref([]); // Thêm cho win
 const loading = ref(true);

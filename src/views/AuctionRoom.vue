@@ -408,7 +408,7 @@ import { ref, reactive, computed, watch, onMounted, onUnmounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
-const API = "http://localhost:8082/api";
+const API = "https://daugiabe-production.up.railway.app/api";
 
 // Reactive state: State chính của component
 const search = ref("");
@@ -523,7 +523,13 @@ watch(statusFilter, () => {
 
 // Functions
 // Helpers
-const getImageUrl = (tenanh) => `${API}/imgs/${tenanh}`;
+/* Supabase image builder */
+const SUPABASE_URL = 'https://gcxlqxkowwkdhyiyjaks.supabase.co' // Thay bằng URL project thật nếu khác
+function buildImageUrl(key) {
+  if (!key) return '/placeholder.png'
+  return SUPABASE_URL.replace(/\/+$/, '') + '/storage/v1/object/public/' + key
+}
+
 const formatVND = (n) =>
   `${new Intl.NumberFormat("vi-VN").format(Math.round(n || 0))} VNĐ`;
 const viTime = (ts) => {
@@ -618,7 +624,7 @@ async function fetchAuctions() {
 
       pageContent.value = (pg.content || []).map((it) => {
         const src = it.sanPham?.hinhAnh?.[0]?.tenanh
-          ? getImageUrl(it.sanPham.hinhAnh[0].tenanh)
+          ? buildImageUrl(it.sanPham.hinhAnh[0].tenanh)
           : null;
         const item = {
           id: it.maphiendg,

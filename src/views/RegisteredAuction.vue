@@ -59,7 +59,7 @@
               <div v-if="!firstImage(a)" class="text-slate-400 text-sm">No image</div>
               <img
                 v-else
-                :src="imageUrl(firstImage(a))"
+                :src="(buildImageUrl(firstImage(a)?.tenanh))"
                 :alt="a.sanPham?.tensp || 'Ảnh sản phẩm'"
                 class="w-full h-full object-cover"
                 loading="lazy"
@@ -188,7 +188,7 @@ defineOptions({ name: "RegisteredSessions" });
 
 const router = useRouter();
 const route = useRoute();
-const API = "http://localhost:8082/api";
+const API = "https://daugiabe-production.up.railway.app/api";
 
 const auctions = ref([]);
 const loading = ref(true);
@@ -259,8 +259,11 @@ function shortCountdown(startIso, endIso) {
 function firstImage(a) {
   return a?.sanPham?.hinhAnh?.[0] || null;
 }
-function imageUrl(img) {
-  return `${API}/imgs/${img.tenanh}`;
+/* Supabase image builder */
+const SUPABASE_URL = 'https://gcxlqxkowwkdhyiyjaks.supabase.co' // Thay bằng URL project thật nếu khác
+function buildImageUrl(key) {
+  if (!key) return '/placeholder.png'
+  return SUPABASE_URL.replace(/\/+$/, '') + '/storage/v1/object/public/' + key
 }
 
 // URL tới trang đấu giá

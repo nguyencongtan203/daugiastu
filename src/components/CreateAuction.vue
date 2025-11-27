@@ -134,7 +134,7 @@ import { reactive, ref, watch, computed } from "vue";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API = "http://localhost:8082/api";
+const API = "https://daugiabe-production.up.railway.app/api";
 
 // Props & Emits
 const props = defineProps({

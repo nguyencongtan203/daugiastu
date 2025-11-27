@@ -215,8 +215,8 @@ import SockJS from "sockjs-client";
 import Stomp from "stompjs";
 import axios from "axios";
 
-const API = "http://localhost:8082/api";
-const SOCKET_URL = "http://localhost:8082/api/ws-auction";
+const API = "https://daugiabe-production.up.railway.app/api";
+const SOCKET_URL = "https://daugiabe-production.up.railway.app/api/ws-auction";
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();

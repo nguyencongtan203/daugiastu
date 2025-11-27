@@ -99,7 +99,7 @@ import Cookies from "js-cookie";
 import { useUserStore } from "../stores/userStore";
 import { useRouter } from "vue-router";
 const router = useRouter();
-const API = "http://localhost:8082/api";
+const API = "https://daugiabe-production.up.railway.app/api";
 
 const show = ref(false);
 const matkhaucu = ref("");
