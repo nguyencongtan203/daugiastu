@@ -1,0 +1,142 @@
+@reference "tailwindcss";
+
+/* ========= CONFIG & BASE ========= */
+.input {
+  @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition text-gray-800 placeholder-gray-400;
+  background-color:#f9fafb;
+}
+.input:disabled { @apply opacity-70 cursor-not-allowed; }
+
+.btn-primary {
+  @apply w-full py-2.5 rounded-lg font-semibold text-white shadow-md transition;
+  background-color:#127fcf;
+}
+.btn-primary:hover {
+  filter:brightness(1.05);
+  background-color:#1992eb;
+}
+
+.error-msg { @apply text-sm text-red-500 text-center font-medium; }
+button,a { transition:all .25s ease; }
+a:hover { text-decoration:underline; }
+
+/* ========= DESKTOP SHELL & CURTAIN ========= */
+.auth-shell {
+  position:relative;
+}
+@media (min-width:768px){
+  .auth-shell::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:#fff;
+    opacity:0;
+    pointer-events:none;
+    transition-property:opacity;
+    transition-timing-function:ease;
+    /* Khi kết thúc: dùng --curtain-out, delay là hold */
+    transition-duration:var(--curtain-out);
+    transition-delay:var(--curtain-hold);
+  }
+  .auth-shell.is-switching::after{
+    opacity:1;
+    transition-duration:var(--curtain-in,320ms);
+    transition-delay:0ms;
+  }
+}
+
+/* ========= AUTH SWITCHER (NỀN TRƯỢT) ========= */
+.auth-switcher{
+  position:absolute;
+  inset:0 auto 0 0;
+  width:50%;
+  height:100%;
+  z-index:20;
+  background:linear-gradient(135deg,#0f6bae 0%,#22b8cf 50%,#c3f0ff 100%);
+  box-shadow:inset 0 0 0 1px rgba(14,165,233,.08);
+  will-change:transform;
+}
+@media (max-width:767px){ .auth-switcher{display:none;} }
+
+/* ========= PANEL STATES ========= */
+.auth-panel{
+  opacity:0;
+  visibility:hidden;
+  transform:scale(.985);
+  transition:
+    opacity 380ms ease,
+    transform 380ms ease;
+  position:relative;
+}
+
+/* Panel hiện hoàn chỉnh */
+.panel-visible{
+  opacity:1;
+  visibility:visible;
+  transform:scale(1);
+}
+
+/* Panel ẩn */
+.panel-hidden{
+  opacity:0;
+  visibility:hidden;
+  transform:scale(.985);
+}
+
+/* ========= LEAVING ANIMATION (mượt hơn) ========= */
+/* Khi bắt đầu switch, panel đang hiển thị sẽ chạy animation leave */
+@media (min-width:768px){
+  .auth-shell.is-switching .auth-panel.panel-visible{
+    animation:panelLeave 500ms cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .auth-shell.is-switching .auth-panel.panel-visible::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:#fff;
+    opacity:0;
+    animation:panelLeaveOverlay 1000ms cubic-bezier(.22,1,.36,1) forwards;
+    pointer-events:none;
+  }
+  /* Trong switching: chặn tương tác */
+  .auth-shell.is-switching .auth-panel{
+    pointer-events:none;
+  }
+}
+
+/* ========= MOBILE SLIDE (giữ logic cũ) ========= */
+@media (max-width:767px){
+  .auth-form-enter-active,
+  .auth-form-leave-active{
+    transition:opacity 320ms ease, transform 320ms ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .auth-form-enter-from{
+    opacity:0;
+    transform:translateY(24px);
+  }
+  .auth-form-leave-to{
+    opacity:0;
+    transform:translateY(-24px);
+  }
+}
+
+/* ========= KEYFRAMES ========= */
+@keyframes panelLeave {
+  0%   { opacity:1; transform:scale(1); }
+  60%  { opacity:0.2; transform:scale(.985); }
+  100% { opacity:0; transform:scale(.975); }
+}
+@keyframes panelLeaveOverlay {
+  0%   { opacity:0; }
+  40%  { opacity:0.65; }
+  100% { opacity:1; }
+}
+
+/* ========= OPTIONAL UTIL ========= */
+.animate-fadeIn { animation: fadeIn .35s ease; }
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}

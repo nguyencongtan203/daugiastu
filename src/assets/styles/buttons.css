@@ -1,0 +1,173 @@
+/* Tailwind @layer components */
+@import "tailwindcss";
+
+@layer components {
+  .btn-flash {
+    @apply relative inline-flex items-center justify-center overflow-hidden rounded-xl font-bold text-white shadow-sm bg-[#0f6bae] hover:bg-[#1385d8] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 px-3 py-2 text-base;
+    isolation: isolate;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .btn-flash span {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Vệt sáng */
+  .btn-flash::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(10px);
+    mix-blend-mode: screen;
+    z-index: 0;
+  }
+
+  /* Hover hiệu ứng */
+  .btn-flash:hover::before,
+  .btn-flash:focus-visible::before,
+  .btn-flash:active::before {
+    animation: btn-shine 0.2s linear forwards;
+  }
+}
+
+/* Keyframes */
+@keyframes btn-shine {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Tab */
+/* Reset cơ bản */
+.tab-btn,
+.sub-tab-btn,
+.tab-btn *,
+.sub-tab-btn *,
+.tab-btn:before,
+.sub-tab-btn:before,
+.tab-btn:after,
+.sub-tab-btn:after {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+/* Button cơ bản */
+.tab-btn,
+.sub-tab-btn {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: transparent;
+  /* ban đầu trong suốt */
+  color: #475569;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  text-transform: none;
+  border-radius: 12px;
+  /* hoặc 12px cho sub-tab */
+  border: 1px solid #e6ebf2;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+/* Text luôn trên nền */
+.tab-btn>span,
+.sub-tab-btn>span {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  pointer-events: none;
+}
+
+/* Pseudo-element để làm nền chạy từ viền vào */
+.tab-btn:before,
+.sub-tab-btn:before {
+  --tilt: 1.2rem;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(-100% - var(--tilt));
+  width: calc(100% + var(--tilt));
+  height: 100%;
+  background: #127fcf;
+  clip-path: polygon(0 0, calc(100% - var(--tilt)) 0, 100% 100%, 0 100%);
+  transform: translateX(var(--progress, 0));
+  transition: transform 1s cubic-bezier(.2, .9, .2, 1);
+  z-index: 1;
+}
+
+/* Pseudo-element thứ 2 (bên phải) */
+.tab-btn:after,
+.sub-tab-btn:after {
+  --tilt: 1.2rem;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: calc(100% + var(--tilt));
+  height: 100%;
+  background: #127fcf;
+  clip-path: polygon(0 0, calc(100% - var(--tilt)) 0, 100% 100%, 0 100%);
+  transform: translateX(var(--progress, 0)) rotate(180deg);
+  transition: transform 1s cubic-bezier(.2, .9, .2, 1);
+  z-index: -1;
+}
+
+/* Hover triggers animation chạy từ viền vào tâm */
+.tab-btn:hover:before,
+.sub-tab-btn:hover:before {
+  --progress: 100%;
+}
+
+.tab-btn:hover:after,
+.sub-tab-btn:hover:after {
+  --progress: -100%;
+}
+
+/* Text đổi màu khi hover */
+.tab-btn:hover>span,
+.sub-tab-btn:hover>span {
+  color: #fff;
+}
+
+.tab-btn--active {
+  @apply bg-sky-100 text-sky-700;
+}
+.tab-btn.active:before,
+.tab-btn.active:after,
+.sub-tab-btn.active:before,
+.sub-tab-btn.active:after {
+  display: none;
+}

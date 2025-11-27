@@ -1,0 +1,316 @@
+@reference "../tailwind.css";
+
+/* --- PAGE WRAPPER --- */
+
+
+/* --- TOOLBAR --- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  top: 64px;
+  z-index: 5;
+}
+
+/* Input tìm kiếm */
+.search-input {
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Select chung */
+.select {
+  height: 44px;
+  border-radius: 10px;
+  border: none; /* Bỏ viền */
+  padding: 0 12px;
+  background: #fff;
+  font-size: 14px;
+  outline: none; /* Bỏ outline khi focus */
+}
+
+/* Responsive: thu nhỏ màn hình, các item wrap xuống dòng */
+@media (max-width: 1024px) {
+  .toolbar {
+    gap: 8px;
+  }
+  .toolbar > * {
+    flex: 1 1 200px;
+  }
+}
+
+/* --- LAYOUT --- */
+.layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  align-items: start;
+  position: relative;
+}
+
+/* Sidebar không bị grid che */
+aside {
+  position: relative;
+  z-index: 10;
+}
+
+/* Cho phép sticky sidebar nếu cần */
+aside.sticky {
+  position: sticky;
+  top: 80px; /* cao hơn toolbar một chút */
+  align-self: start;
+  z-index: 10;
+}
+
+/* Content không chồng lên sidebar */
+.content {
+  position: relative;
+  z-index: 1;
+  min-height: 400px;
+  overflow: visible;
+}
+
+/* Responsive layout */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  aside {
+    order: -1;
+    width: 100%;
+  }
+}
+
+/* --- SIDEBAR --- */
+.sidebar-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+}
+.panel > summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+.panel-body {
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* --- GRID PHIÊN ĐẤU GIÁ --- */
+#auction-grid .grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+  #auction-grid .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  #auction-grid .grid { grid-template-columns: 1fr; }
+}
+
+/* --- CARD --- */
+.card {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(2, 32, 71, 0.06);
+  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.badge {
+  display: inline-block;
+  background: #fde68a;
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.muted { color: #6b7280; }
+.small { font-size: 12px; }
+.thumb {
+  border: 1px solid #f3f4f6;
+  background: #fafafa;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.title {
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 6px 0;
+  min-height: 40px;
+}
+.meta {
+  font-size: 14px;
+  color: #4b5563;
+  display: grid;
+  gap: 2px;
+}
+.price {
+  font-size: 14px;
+  color: #4b5563;
+  margin-top: 6px;
+}
+.price .off { display: none; }
+.price:hover .on { display: none; }
+.price:hover .off { display: inline; }
+
+/* --- BUTTON --- */
+.btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #22b8cf;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { background: #1098ad; }
+
+/* --- PHÂN TRANG --- */
+.page-pill {
+  @apply h-10 px-4 inline-flex items-center justify-center rounded-full text-sm ring-1 ring-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 disabled:opacity-50;
+}
+.page-num {
+  @apply h-10 w-10 inline-flex items-center justify-center rounded-full text-sm ring-1 ring-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50;
+}
+.page-num--active {
+  @apply bg-sky-600 text-white ring-sky-600 hover:bg-sky-600;
+}
+
+/* --- Ô TÌM KIẾM --- */
+.search-input {
+  @apply h-11 rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-200 focus:border-sky-400;
+}
+
+/* NÚT DANH MỤC */
+.category-btn {
+  @apply inline-flex items-center px-4 py-2 h-11 rounded-xl bg-white text-slate-700 shadow-sm hover:bg-slate-50;
+}
+.search-input,
+.select,
+.category-btn {
+  @apply border-none shadow-none focus:ring-0;
+}
+
+
+/* DROPDOWN DANH MỤC */
+.category-dropdown {
+  @apply absolute left-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-lg z-50;
+}
+
+/* Dropdown list item */
+.category-dropdown li {
+  @apply px-4 py-2 text-sm text-slate-700 cursor-pointer hover:bg-sky-50;
+}
+
+/* Khi không có item */
+.category-dropdown li.empty {
+  @apply px-4 py-3 text-sm text-slate-500 text-center;
+}
+
+/* --- HIỂN THỊ THỜI GIAN TRÊN ẢNH --- */
+.image-timer {
+  @apply absolute top-2 right-2 bg-white/95 backdrop-blur rounded-md px-2 py-1 ring-1 ring-slate-200 inline-flex items-center gap-1 text-rose-600 text-[13px] font-semibold;
+  z-index: 10;               /* <<< quan trọng */
+  pointer-events: none;      /* không cản trở hover vào vùng ảnh nếu cần */
+}
+
+/* --- BẢNG 2 CỘT --- */
+.meta-grid-2 {
+  @apply grid gap-y-2 gap-x-3 items-center;
+  grid-template-columns: auto 1fr;
+}
+.label {
+  @apply text-slate-600 text-sm whitespace-nowrap;
+}
+.value {
+  @apply text-sm text-slate-900 font-semibold text-right;
+}
+
+/* --- TEXT CLAMP --- */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- TABULAR NUMBERS --- */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- FADE EFFECT --- */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* === Image shimmer loading (skeleton) === */
+.image-wrap {
+  position: relative;
+}
+
+.image-loading {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  /* Vệt sáng lướt */
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+  z-index: 0;
+}
+
+@keyframes shine {
+  100% { background-position-x: -200%; }
+}

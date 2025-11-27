@@ -1,0 +1,144 @@
+/* ========= Layout cơ bản ========= */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+/* ========= Input underline ========= */
+.input {
+  width: 100%;
+  padding: 10px 4px 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  border-radius: 0;
+  background: transparent;
+  color: #1e293b;
+  transition: border-color .28s ease, color .25s ease;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  letter-spacing: .2px;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom-color: #127fcf;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: .7;
+  border-bottom-color: #cbd5e1;
+  color: #64748b;
+}
+
+/* ========= Lỗi ========= */
+.input.error {
+  border-bottom-color: #e03131 !important;
+  animation: shake .22s ease-in-out;
+}
+
+.error-msg {
+  font-size: .72rem;
+  font-weight: 600;
+  color: #e03131;
+  margin-top: 4px;
+  letter-spacing: .3px;
+}
+
+/* ========= Hiệu ứng ========= */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  50% {
+    transform: translateX(3px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 640px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row label {
+    width: 100%;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .form-row label {
+    width: 100%;
+  }
+
+  .form-row>div {
+    width: 100%;
+  }
+}
+
+/* ========= Dark mode ========= */
+[data-theme="dark"] .input {
+  border-bottom-color: #475569;
+  color: #f1f5f9;
+  background: transparent;
+}
+
+[data-theme="dark"] .input:focus {
+  border-bottom-color: #3ea8ff;
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background: linear-gradient(180deg, #1f2937, #1e293b);
+  border-color: #334155;
+  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, .6);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: #e5edf7;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item.active {
+  background: #142132;
+  color: #7cc0ff;
+}
+
+[data-theme="dark"] .dropdown-item.selected {
+  background: #0f2033;
+  color: #7cc0ff;
+}
+
+[data-theme="dark"] .input:disabled {
+  border-bottom-color: #334155;
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .input.error {
+  border-bottom-color: #f87171 !important;
+}

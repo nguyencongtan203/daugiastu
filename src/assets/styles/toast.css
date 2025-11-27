@@ -1,0 +1,32 @@
+/* Toast hiệu ứng trượt và style viền trái */
+@reference "tailwindcss";
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.4s ease;
+}
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(100%);
+}
+/* Toast tổng thể */
+.toast {
+  background-color: #fff;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px 16px;
+  font-weight: 400; /* chữ thường, không đậm */
+  border-left-width: 4px;
+}
+
+.toast-success {
+  border-left-color: #22c55e; /* xanh lá */
+}
+
+.toast-error {
+  border-left-color: #ef4444; /* đỏ */
+}
